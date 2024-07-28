@@ -118,7 +118,14 @@ export default function ModalAddTodo({
           sx={{ width: "100%" }}
           name="timestamp"
           disablePast={!isEdit}
-          defaultValue={moment(dataEdit?.timestamp).add(.1, 'minutes')}
+          defaultValue={moment(dataEdit?.timestamp).add(0.1, "minutes")}
+          onError={(err) =>
+            setError({
+              ...error,
+              timestamp:
+                err === "disablePast" ? "Date cannot be in the past" : "",
+            })
+          }
           slotProps={{
             textField: {
               helperText: error.timestamp,
